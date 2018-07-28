@@ -3,3 +3,8 @@
   position: relative;
   padding-top: 70px;
 }
+
+.loader {
+  display: inline-block;
+  margin: 0 auto;
+}

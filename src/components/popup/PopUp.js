@@ -4,7 +4,8 @@ import './styles.css';
 
 const PopUp = ({ hidePopUp, children }) => {
     return (
-        <div onClick={hidePopUp} className="popup">
+        <div className="popup">
+            <div onClick={hidePopUp} className="popup__veil" />
             <section className="popup__body">
                 { children }
             </section>
