@@ -50,7 +50,7 @@ class BlockPage extends Component {
         const { block } = this.state;
         const links = [block];
         let linkedBlock = block;
-        let end = false;
+        let notEnd = true;
         let link = null;
 
         do {
@@ -60,9 +60,9 @@ class BlockPage extends Component {
             linkedBlock = this.getSelectedBlock(link);
             links.push(linkedBlock);
           } else {
-            end = true;
+            notEnd = false;
           }
-        } while (end);
+        } while (notEnd);
 
         this.setState({ foundInterlinks: links });
       },
@@ -91,7 +91,7 @@ class BlockPage extends Component {
     }
 
     if (!isLoading && !block) {
-      return <Redirect to="not-found" />
+      return <Redirect from="/block/:blockId" to="/not-found" />
     }
 
     if (!isLoading && block.id !== blockId) {

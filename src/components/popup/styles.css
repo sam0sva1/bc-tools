@@ -10,13 +10,14 @@
 }
 
 .popup__body {
-    min-height: 70vh;
+    height: 70vh;
     width: 70%;
 	border: 1px solid #E6E6E6;
 	border-radius: 7px;
 	background-color: #FFFFFF;
     box-shadow: 0 4px 15px 0 rgba(0,0,0,0.1);
     z-index: 1;
+    overflow-y: auto;
 }
 
 .popup__veil {
