@@ -13,6 +13,7 @@ class BlockPage extends Component {
   state = {
     block: null,
     foundInterlinks: null,
+    selectedLevel: 0,
     isLoading: true,
   }
 
@@ -34,21 +35,17 @@ class BlockPage extends Component {
     return this.props.chain.find(block => block.id === id);
   }
 
-  getSameLevelInterlinks = () => {
-
-  }
-
   onBackButtonClickHandler = () => {
     this.props.history.push('/');
   }
 
   hidePopUp = () => {
-    this.setState({ foundInterlinks: null });
+    this.setState({ foundInterlinks: null, selectedLevel: 0 });
   }
 
   onInterlinkClick = (id, level) => () => {
     this.setState(
-      { foundInterlinks: [] },
+      { foundInterlinks: [], selectedLevel: level },
       () => {
         const { block } = this.state;
         const links = [block];
@@ -60,7 +57,7 @@ class BlockPage extends Component {
           link = linkedBlock.interlinks[level];
 
           if (link) {
-            linkedBlock = this.props.chain.find(block => block.id === link);
+            linkedBlock = this.getSelectedBlock(link);
             links.push(linkedBlock);
           } else {
             end = true;
@@ -79,7 +76,7 @@ class BlockPage extends Component {
     const Wrapper = ({ children }) => (
       <section className="page block-page">
         <TopBar>
-          <TopBar.BackButton onClick={this.onBackButtonClickHandler}>To list</TopBar.BackButton>
+          <TopBar.BackButton onClick={this.onBackButtonClickHandler}>TO LIST</TopBar.BackButton>
         </TopBar>
         { children }
       </section>
@@ -102,41 +99,52 @@ class BlockPage extends Component {
     }
 
     const { height, id, timestamp, interlinks } = block;
-    const { foundInterlinks } = this.state;
+    const { foundInterlinks, selectedLevel } = this.state;
 
     return (
       <Wrapper>
         <div className="block-page__content">
-          <span className="block-page__index"># { height + 1 }</span>
-          <span className="block-page__date">{ formatDate(timestamp) }</span>
-          <span className="block-page__identifier">ID: {id}</span>
-          <div className="block-page__interlinks">
-            Interlinks:
-            {
-              interlinks.map((id, index) => (
-                <button
-                  onClick={this.onInterlinkClick(id, index)}
-                  key={`${id}${index}`}
-                  className="block-page__interlink interlink"
-                >
-                  <div className="interlink__level">Level {index + 1}</div>
-                  <div className="interlink__idx">{ id }</div>
-                </button>
-              ))
-            }
+          <div className="block-page__hat">
+            <span className="block-page__index"># { height + 1 }</span>
+            <span className="block-page__date">{ formatDate(timestamp) }</span>
           </div>
+          <span className="block-page__identifier">ID: {id}</span>
+          {
+            interlinks.length > 0 &&
+            <div className="block-page__interlinks interlinks">
+              <div className="interlinks__label">Interlinks:</div>
+              <div className="interlinks__list">
+                {
+                  interlinks.map((id, index) => (
+                    <button
+                      onClick={this.onInterlinkClick(id, index)}
+                      key={`${id}${index}`}
+                      className="interlinks__interlink interlink"
+                    >
+                      <div className="interlink__level">Level {index + 1}</div>
+                      <div className="interlink__idx">{ id }</div>
+                    </button>
+                  ))
+                }
+              </div>
+            </div>
+          }
         </div>
 
 
         {
           foundInterlinks &&
           <PopUp hidePopUp={this.hidePopUp}>
-            Linked:
-            {
-              foundInterlinks.length > 0
-                ? foundInterlinks.map(block => <Block key={block.id} {...block} />)
-                : <h2 class="loader">Searching...</h2>
-            }
+            <div className="block-page-popup">
+              <div className="block-page-popup__label">Level {selectedLevel + 1} linked:</div>
+              <div className="block-page-popup__list">
+                {
+                  foundInterlinks.length > 0
+                    ? foundInterlinks.map(block => <Block key={block.id} {...block} />)
+                    : <h2 class="loader">Searching...</h2>
+                }
+              </div>
+            </div>
           </PopUp>
         }
       </Wrapper>

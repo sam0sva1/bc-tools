@@ -7,7 +7,13 @@
     height: 50px;
     background-color: #FFFFFF;
     border-bottom: 1px solid #979797;
-    padding: 0 30px;
+}
+
+.top-bar__content {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .top-bar__logo {
@@ -19,11 +25,13 @@
 .top-bar__controll {
     border: none;
     background: none;
+    cursor: pointer;
 }
 
 .top-bar__back-button {
     color: #969696;
-    font-family: serif;
-    font-size: 13px;
+    font-family: sans-serif;
+    font-size: 16px;
     line-height: 18px;
+    padding: 10px 20px;
 }

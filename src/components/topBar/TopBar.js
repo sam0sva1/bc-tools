@@ -25,8 +25,10 @@ class Header extends Component {
 
         return (
             <section className="top-bar">
-              <img className="top-bar__logo" src="http://emojipop.net/data/images/emoji_set_820.png" alt="little logo" />
+              <div className="top-bar__content">
+                <img className="top-bar__logo" src="http://emojipop.net/data/images/emoji_set_820.png" alt="little logo" />
                 { children }
+              </div>
             </section>
         );
     }
