@@ -10,10 +10,6 @@ import chain from './chain.json';
 
 
 class App extends Component {
-  componentDidMount = () => {
-    console.log('chain', chain);
-  }
-
   render() {
     return (
       <CommonContextProvider value={chain}>
