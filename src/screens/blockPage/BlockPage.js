@@ -85,7 +85,7 @@ class BlockPage extends Component {
     if (isLoading && !block) {
       return (
         <Wrapper>
-          <h2 class="loader">Loading...</h2>
+          <h2 className="loader">Loading...</h2>
         </Wrapper>
       );
     }
@@ -141,7 +141,7 @@ class BlockPage extends Component {
                 {
                   foundInterlinks.length > 0
                     ? foundInterlinks.map(block => <Block key={block.id} {...block} />)
-                    : <h2 class="loader">Searching...</h2>
+                    : <h2 className="loader">Searching...</h2>
                 }
               </div>
             </div>

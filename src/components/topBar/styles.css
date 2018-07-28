@@ -7,6 +7,7 @@
     height: 50px;
     background-color: #FFFFFF;
     border-bottom: 1px solid #979797;
+    z-index: 1;
 }
 
 .top-bar__content {

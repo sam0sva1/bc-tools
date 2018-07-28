@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './styles.css';
 
 
@@ -26,8 +27,10 @@ class Header extends Component {
         return (
             <section className="top-bar">
               <div className="top-bar__content">
-                <img className="top-bar__logo" src="http://emojipop.net/data/images/emoji_set_820.png" alt="little logo" />
-                { children }
+                <Link to="/">
+                  <img className="top-bar__logo" src="http://emojipop.net/data/images/emoji_set_820.png" alt="little logo" />
+                </Link>
+                  { children }
               </div>
             </section>
         );
